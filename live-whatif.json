@@ -1,0 +1,1 @@
+{"decision":"deny","amount":0,"reasons":["Order is over 30 days old"],"steps":["Checked prior refunds: 0.","Checked order age: 31 days.","Applied the policy rule for reason: damaged on arrival."],"warning":"","model":"claude-haiku-4.5"}

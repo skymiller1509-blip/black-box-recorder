@@ -1,0 +1,1 @@
+{"decision":"approve","amount":120,"reasons":["Item arrived damaged on arrival within 30-day window"],"steps":["Checked prior refunds: 0.","Checked order age: 28 days.","Applied the policy rule for reason: damaged on arrival."],"warning":"","model":"claude-haiku-4.5"}

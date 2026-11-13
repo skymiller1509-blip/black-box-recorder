@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Black Box Recorder - flight recorder for AI agents</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; padding: 16px; line-height: 1.5; }
+  h1 { font-size: 1.4em; } h2 { font-size: 1.1em; margin-top: 28px; }
+  button { padding: 10px 14px; margin: 4px 4px 4px 0; cursor: pointer; }
+  .order-btn { display: block; width: 100%; text-align: left; margin: 6px 0; }
+  .card { border: 1px solid #ccc; border-radius: 8px; padding: 12px; margin: 10px 0; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; color: #fff; font-weight: bold; }
+  .approve { background: #1a7f37; } .deny { background: #c0392b; }
+  .partial { background: #b7791f; } .escalate { background: #555; }
+  .flip { background: #fff3cd; border: 1px solid #d4a017; padding: 10px; border-radius: 8px; font-weight: bold; }
+  .same { background: #e8f5e9; border: 1px solid #1a7f37; padding: 10px; border-radius: 8px; }
+  .log-item { cursor: pointer; padding: 8px; border-bottom: 1px solid #eee; }
+  .log-item:hover { background: #f5f5f5; }
+  .whatif { background: #eef4ff; }
+  label { display: block; margin: 10px 0 4px; }
+  input[type=range] { width: 100%; }
+  .small { color: #555; font-size: 0.9em; }
+  #status { min-height: 1.2em; color: #555; }
+</style>
+</head>
+<body>
+<h1>Black Box Recorder</h1>
+<p>Flight recorder for AI agents. Every input and every decision of a refunds agent, logged. After a bad call, change one input and see how the decision would have changed.</p>
+
+<h2>1. Run the refunds agent</h2>
+<p class="small">Sample orders only. No real money, no real customers.</p>
+<div id="orders"></div>
+<p id="status"></p>
+
+<h2>2. The recorder</h2>
+<p class="small">Every decision, in order. Click one to read it. What-if replays are marked.</p>
+<div id="log"><p class="small">Nothing recorded yet. Run an order above.</p></div>
+
+<h2>3. The decision</h2>
+<div id="detail"><p class="small">Run an order or click a recorded decision.</p></div>
+
+<h2>4. What if?</h2>
+<p class="small">Change one input on the selected order and re-run the decision. The old decision stays on the record. The new one sits beside it.</p>
+<div class="card whatif">
+  <label for="age">Order age: <span id="ageVal">28</span> days</label>
+  <input type="range" id="age" min="0" max="60" value="28">
+  <label for="reason">Reason</label>
+  <select id="reason">
+    <option value="damaged on arrival">damaged on arrival</option>
+    <option value="changed mind">changed mind</option>
+    <option value="defective">defective</option>
+    <option value="late delivery">late delivery</option>
+  </select>
+  <br><br>
+  <button id="replay">Re-run this decision</button>
+</div>
+<div id="compare"></div>
+
+<p class="small">Honest limits: the recorder logs what the agent was given and what it decided. The reasoning steps are written out by the model itself, not read from inside SERV Reasoning. A what-if is a fresh SERV call with changed inputs, not a rewind of the original run. Nothing is stored on the server. Sample data only.</p>
+<p class="small" id="model"></p>
+<script src="app.js"></script>
+</body>
+</html>
